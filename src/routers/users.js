@@ -4,6 +4,7 @@ const auth = require('../middleware/auth');
 const multer = require('multer');
 const sharp = require('sharp');
 const { sendWelcomeMail, sendCancellationMail } = require('../emails/account');
+const log = console.log;
 
 const router = new express.Router();
 
@@ -26,13 +27,14 @@ router.post('/users', async (req, res) => {
     const user = new User(req.body);
 
     try {
-        const token = await user.generateAuthToken()
         await user.save();
         sendWelcomeMail(user.email, user.name);
+        const token = await user.generateAuthToken()
+
         log(`user created successfully`);
         res.status(201).send({ user, token });
     } catch (error) {
-        res.status(400).send(error)
+        res.status(400).send(error);
     }
 })
 
