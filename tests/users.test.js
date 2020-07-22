@@ -1,25 +1,9 @@
 const request = require('supertest');
-const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose');
 const app = require('../src/app');
 const User = require('../src/models/user');
-const { findById } = require('../src/models/user');
+const { testUserId, testUser, configureDatabase } = require('./fixtures/db');
 
-const testUserId = new mongoose.Types.ObjectId();
-const testUser = {
-    _id: testUserId,
-    name: 'Meta World-Peace',
-    email: 'peace@testing.com',
-    password: 'peaceAndLove!!',
-    tokens: [{
-        token: jwt.sign({ _id: testUserId }, process.env.JWT_SECRET)
-    }]
-}
-
-beforeEach(async () => {
-    await User.deleteMany({});
-    await new User(testUser).save();
-})
+beforeEach(configureDatabase);
 
 test('Should sign up a new user', async () => {
     const response = await request(app)
@@ -103,4 +87,48 @@ test('Should not delete unauthenticated user account', async () => {
         .set('Authorization', `Bearer `)
         .send()
         .expect(401);
+})
+
+test('Should upload avatar image', async () => {
+    await request(app)
+        .post('/users/me/avatar')
+        .set('Authorization', `Bearer ${testUser.tokens[0].token}`)
+        .attach('avatar', 'tests/fixtures/profile-pic.jpg')
+        .expect(200)
+
+    const user = await User.findById(testUserId);
+    expect(user.avatar).toEqual(expect.any(Buffer));
+})
+
+test('Should update user fields', async () => {
+    await request(app)
+        .patch('/users/me')
+        .set('Authorization', `Bearer ${testUser.tokens[0].token}`)
+        .send({
+            name: 'Testicles'
+        })
+        .expect(200);
+        const user = await User.findById(testUserId); 
+        expect(user.name).toBe('Testicles');
+})
+
+test('Should not update unauthenticated user', async () => {
+    await request(app)
+        .patch('/users/me')
+        .set('Authorization', `Bearer `)
+        .send({
+            name: 'Testicles'
+        })
+        .expect(401);
+})
+
+test('Should not update invalid user fields', async () => {
+    await request(app)
+        .patch('/users/me')
+        .set('Authorization', `Bearer ${testUser.tokens[0].token}`)
+        .send({
+            name: 'Testicles',
+            tokens: '44i!!'
+        })
+        .expect(400);
 })
