@@ -5,25 +5,28 @@ class Task {
         this.tasks = [];
     }
 
-    getTasksFromDB() {
+    async getTasksFromDB() {
         const config = {
             headers: { Authorization: `Bearer ${TOKEN}` } // will need to set up token management for the client
         };
+        try {
+            const resp = await axios.get('/tasks', config);
 
-        axios.get(
-            '/tasks',
-            config
-        ).then((resp) => {
             console.log(resp.data);
-        }).catch((error) => console.log(error))
+            this.tasks = resp.data;
+
+        }
+        catch (error) {
+            console.log(error);
+        }
+
     }
-
-
 
     createTask(description) {
         //send POST request to ('/tsaks')
     }
 }
 
-const t = new Task()
-t.getTasksFromDB()
+// const t = new Task()
+// t.getTasksFromDB()
+// console.log(t);
