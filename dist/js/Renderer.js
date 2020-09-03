@@ -22,12 +22,12 @@ class Renderer {
     }
 
     renderTasks(tasks) {
-        $("#tasks").empty()
+        $("#to-do-list").empty()
         const source = $('#tasks-template').html();
         const template = Handlebars.compile(source);
         const newHTML = template({ tasks })
 
-        $('#tasks').append(newHTML);
+        $('#to-do-list').append(newHTML);
 
     }
 }
