@@ -12,7 +12,7 @@ class Task {
         try {
             const resp = await axios.get('/tasks', config);
 
-            console.log(resp.data);
+            //console.log(resp.data);
             this.tasks = resp.data;
 
         }

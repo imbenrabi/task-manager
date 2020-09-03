@@ -1,0 +1,81 @@
+body {
+    display: grid;
+    grid-template-areas: 
+    "s s h h h h"
+    "s s m m m m"
+    "s s m m m m"
+    "s s m m m m"
+    "s s m m m m"
+    "f f f f f f";
+}
+
+header {
+    grid-area: h;
+
+    background-color: azure;
+}
+
+footer{
+    grid-area: f;
+
+    color: #888888;
+    border-top: 1px solid #eeeeee;
+    margin-top: 0px;
+    padding: 16px 0;
+}
+
+#side-bar{
+    grid-area: s;
+
+    background-color: azure;
+}
+
+#main-content{
+    grid-area: m;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+#tasks{
+    flex-grow: 1;
+}
+
+.task{
+    display: grid;
+    grid-template-areas: "t t t t d";
+
+    margin: 5px;
+    align-content: center;
+}
+
+.task div{
+    border: 1px solid black;
+    grid-area: t;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    margin: 5px;
+    padding: 8px;
+    align-content: center;
+}
+
+.task div p{
+    margin: 5px;
+    padding: 8px;
+    align-content: center;
+}
+
+#delete-btn{
+    grid-area: d;
+}
+
+.task button{
+    cursor: pointer;
+    border: 1px solid black;
+    background-color: azure;
+    color: black;
+    padding: 8px;
+    margin: 5px;
+    align-content: center;
+}

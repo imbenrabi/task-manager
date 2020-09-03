@@ -4,14 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
     <title>Task Manager</title>
 </head>
 
 <body>
-    <h1>Task Manager</h1>
+    <header>
+        <h1>Task Manager</h1>
+
+    </header>
+
+    <div id="side-bar"></div>
+
+    <div id="main-content">
+        <div id="tasks"></div>
+    </div>
+
+    <footer>
+        <p>Created by Ben Rabi</p>
+    </footer>
+
+    <script id="tasks-template" type="text/x-handlebars-template">
+        {{#each tasks}}
+        <div class="task" data-id="{{_id}}">
+            <div>
+                <p class="task-decription">{{description}}</p>
+                <p class="task-status">{{completed}}</p>
+                <p class="class-date">{{createdAt}}</p>
+                <button class="done-btn">Done</button>
+
+            </div>
+            <button class="delete-btn">Delete</button>
+
+        </div>
+        {{/each}}
+    </script>
 
     <script src="./jquery/dist/jquery.js"></script>
     <script src="./axios/dist/axios.js"></script>
+    <script src="./handlebars/dist/handlebars.js"></script>
+    <script src="./js/Renderer.js"></script>
     <script src="./js/Task.js"></script>
     <script src="./js/main.js"></script>
 </body>

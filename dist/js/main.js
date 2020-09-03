@@ -1,8 +1,10 @@
 (async function () {
     const task = new Task();
+    const renderer = new Renderer()
 
     await task.getTasksFromDB();
-    console.log(task.tasks);
+    renderer.renderTasks(task.tasks);
+
 })();
 
 
