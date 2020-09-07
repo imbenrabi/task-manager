@@ -21,7 +21,7 @@ class Renderer {
 
     }
 
-    renderTasks(tasks) {
+    renderTasks(tasks) { //add option object to handle task filtering and sorting
         $("#to-do-list").empty()
         const source = $('#tasks-template').html();
         const template = Handlebars.compile(source);

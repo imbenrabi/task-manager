@@ -12,9 +12,7 @@ class Task {
         try {
             const resp = await axios.get('/tasks', config);
 
-            //console.log(resp.data);
             this.tasks = resp.data;
-
         }
         catch (error) {
             console.log(error);
@@ -24,6 +22,14 @@ class Task {
 
     createTask(description) {
         //send POST request to ('/tsaks')
+    }
+
+    deleteTask(id) {
+
+    }
+
+    updateTask(id) {
+
     }
 }
 

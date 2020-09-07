@@ -17,11 +17,33 @@
     <div id="side-bar"></div>
 
     <div id="main-content">
+        <div id="add-task-modal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span id="task-modal-close" class="close-modal">&times;</span>
+                    <h2>Create New Task</h2>
+                </div>
+                <div class="modal-body">
+                    <h3>What do you need to do?</h3>
+                    <div>
+                        <input id="task-description-input" type="text" placeholder="Describe your task">
+                        <button id="add-task-btn">Add Task</button>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <h4>"No rest for the wicked..."</h4>
+                </div>
+            </div>
+
+        </div>
+
         <div id="tasks">
             <div id="to-do-list"></div>
 
             <div id="bottom">
-                <button id="create-task">Add Task</button>
+                <button id="create-task">Create Task</button>
             </div>
         </div>
     </div>
@@ -40,7 +62,7 @@
                 <button class="done-btn">Done</button>
 
             </div>
-            <button class="delete-btn">Delete</button>
+            <button class="delete-btn">Delete Task</button>
 
         </div>
         {{/each}}
