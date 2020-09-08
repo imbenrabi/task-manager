@@ -106,15 +106,6 @@ footer{
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
   
-/* Modal Content/Box */
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-}
-  
 /* The Close Button */
 .close-modal {
     color: #aaa;
@@ -167,6 +158,7 @@ footer{
 /* Modal Content */
 .modal-content {
     position: relative;
+    top: 25vh;
     background-color: #fefefe;
     margin: auto;
     padding: 0;
@@ -180,5 +172,5 @@ footer{
 /* Add Animation */
 @keyframes animatetop {
     from {top: -300px; opacity: 0}
-    to {top: 0; opacity: 1}
+    to {top: 25vh; opacity: 1}
 }
