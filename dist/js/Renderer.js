@@ -15,10 +15,11 @@
 //     "updatedAt": "2020-09-03T11:05:21.087Z",
 //     "__v": 0
 // }]
+const $addTaskModal = $('#add-task-modal');
+const $taskModalCloseBtn = $('#task-modal-close');
 
 class Renderer {
     constructor() {
-
     }
 
     renderTasks(tasks) { //add option object to handle task filtering and sorting
@@ -29,6 +30,24 @@ class Renderer {
 
         $('#to-do-list').append(newHTML);
 
+    }
+
+    handleCreateTaskClick() {
+        $addTaskModal.css('display', 'block');
+
+    }
+
+    handleTaskModalClose() {
+        $addTaskModal.css('display', 'none');
+
+    }
+
+    handleClickOffModal(e) {
+        const modal = document.getElementById('add-task-modal')
+
+        if (e.target == modal) {
+            $addTaskModal.css('display', 'none');
+        }
     }
 }
 

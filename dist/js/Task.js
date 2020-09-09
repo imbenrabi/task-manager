@@ -7,8 +7,9 @@ class Task {
 
     async getTasksFromDB() {
         const config = {
-            headers: { Authorization: `Bearer ${TOKEN}` } // will need to set up token management for the client
+            headers: { Authorization: `Bearer ${TOKEN}` } // will need to set up token management for the client - probably instance specific (in the constructor)
         };
+
         try {
             const resp = await axios.get('/tasks', config);
 
@@ -20,16 +21,64 @@ class Task {
 
     }
 
-    createTask(description) {
-        //send POST request to ('/tsaks')
+    async createTask(description) {
+        const config = {
+            headers: { Authorization: `Bearer ${TOKEN}` }
+        };
+
+        try {
+            const resp = await axios.post('/tasks', description, config);
+
+            this.tasks.push(resp.data);
+            return resp.status;
+        } catch (error) {
+            return error;
+        }
     }
 
-    deleteTask(id) {
+    async deleteTask(id) {
+        const config = {
+            headers: { Authorization: `Bearer ${TOKEN}` }
+        };
 
+        try {
+            const resp = await axios.delete(`/tasks/${id}`, config);
+
+            if (resp.status === 200 && resp.data._id === id) {
+                const index = this.tasks.findIndex(t => t._id === id);
+                this.tasks.splice(index, 1);
+            } else {
+
+                throw new Error('Mismatch between data-id and server response id!')
+            }
+
+        } catch (error) {
+            return error;
+        }
     }
 
-    updateTask(id) {
+    async updateTask(id, updates) {
+        const config = {
+            headers: { Authorization: `Bearer ${TOKEN}` }
+        };
 
+        try {
+            const resp = await axios.patch(`/tasks/${id}`, updates, config);
+
+            console.log(resp.data);
+            if (resp.status === 200 && resp.data._id === id) {
+                const index = this.tasks.findIndex(t => t._id === id);
+
+                this.tasks.splice(index, 1);
+                this.tasks.push(resp.data);
+            } else {
+
+                throw new Error('Mismatch between data-id and server response id!')
+            }
+
+        } catch (error) {
+            return error;
+        }
     }
 }
 
