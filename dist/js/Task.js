@@ -65,7 +65,6 @@ class Task {
         try {
             const resp = await axios.patch(`/tasks/${id}`, updates, config);
 
-            console.log(resp.data);
             if (resp.status === 200 && resp.data._id === id) {
                 const index = this.tasks.findIndex(t => t._id === id);
 

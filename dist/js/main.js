@@ -7,7 +7,6 @@
     const $taskDecriptionInput = $('#task-description-input');
     const $toDoList = $('#to-do-list');
 
-
     const handleAddTask = async () => {
         const description = $taskDecriptionInput.val();
 
@@ -46,7 +45,7 @@
 
     const handleDoneTask = async function () {
         const id = $(this).closest('.task').data().id;
-        console.log(id);
+
         try {
             await task.updateTask(id, { completed: true });
             renderer.renderTasks(task.tasks);
