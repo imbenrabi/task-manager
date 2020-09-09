@@ -6,6 +6,9 @@
     const $addTaskBtn = $('#add-task-btn');
     const $taskDecriptionInput = $('#task-description-input');
     const $toDoList = $('#to-do-list');
+    const $allFilter = $('#all-filter');
+    const $toDoFilter = $('#todo-filter');
+    const $doneFilter = $('#done-filter');
 
     const handleAddTask = async () => {
         const description = $taskDecriptionInput.val();
@@ -56,6 +59,18 @@
         }
     }
 
+    const handleToDoFilter = () => {
+        renderer.renderTasks(task.tasks.filter(t => t.completed === false));
+    }
+
+    const handleDoneFilter = () => {
+        renderer.renderTasks(task.tasks.filter(t => t.completed === true));
+    }
+
+    const handleAllFilter = () => {
+        renderer.renderTasks(task.tasks);
+    }
+
     await task.getTasksFromDB();
     renderer.renderTasks(task.tasks);
 
@@ -67,6 +82,10 @@
 
     $toDoList.on('click', '.delete-btn', handleDeleteTask);
     $toDoList.on('click', '.done-btn', handleDoneTask);
+
+    $allFilter.click(handleAllFilter);
+    $toDoFilter.click(handleToDoFilter);
+    $doneFilter.click(handleDoneFilter);
 
 })();
 

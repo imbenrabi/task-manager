@@ -62,6 +62,10 @@ class Task {
             headers: { Authorization: `Bearer ${TOKEN}` }
         };
 
+        if (this.tasks.find(t => t._id === id).completed === true) {
+            return;
+        }
+
         try {
             const resp = await axios.patch(`/tasks/${id}`, updates, config);
 
