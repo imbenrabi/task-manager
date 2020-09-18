@@ -12,6 +12,7 @@ class User {
 
         } catch (error) {
             throw error;
+
         }
     }
 
@@ -26,8 +27,8 @@ class User {
 
             this.data = resp.data.user;
             return resp.data.token;
-        } catch (error) {
 
+        } catch (error) {
             throw error;
 
         }

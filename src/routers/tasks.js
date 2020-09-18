@@ -7,17 +7,17 @@ const router = new express.Router();
 
 router.post('/tasks', auth, async (req, res) => {
     const task = new Task({
-        // '...' is an es6 operator for copying an entire set of params
         ...req.body,
         owner: req.user._id
     })
 
     try {
         await task.save();
-        log(`task added successfully`)
         res.status(201).send(task)
+
     } catch (error) {
         res.status(400).send(error);
+
     }
 })
 

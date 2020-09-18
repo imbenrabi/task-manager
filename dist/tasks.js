@@ -10,12 +10,13 @@
     const $allFilter = $('#all-filter');
     const $toDoFilter = $('#todo-filter');
     const $doneFilter = $('#done-filter');
+    const $logoutBtn = $('#logout-btn');
 
     const handleAddTask = async () => {
         const description = $taskDecriptionInput.val();
 
         try {
-            await task.createTask({ "description": description });
+            await task.createTask({ "description": description }, token);
             $taskDecriptionInput.val('');
             renderer.handleTaskModalClose();
 
@@ -35,7 +36,7 @@
         const id = $(this).closest('.task').data().id;
 
         try {
-            await task.deleteTask(id);
+            await task.deleteTask(id, token);
             renderer.renderTasks(task.tasks);
 
         } catch (error) {
@@ -51,7 +52,7 @@
         const id = $(this).closest('.task').data().id;
 
         try {
-            await task.updateTask(id, { completed: true });
+            await task.updateTask(id, { completed: true }, token);
             renderer.renderTasks(task.tasks);
         } catch (error) {
             console.log(error);
@@ -72,8 +73,25 @@
         renderer.renderTasks(task.tasks);
     }
 
-    await task.getTasksFromDB();
-    renderer.renderTasks(task.tasks);
+    const handleLogoutClick = () => {
+        location.replace('/login');
+        loginService.logout();
+
+    }
+
+    if (!loginService.isLoggedIn()) {
+        location.replace('/login');
+    }
+
+    try {
+        const token = loginService.getToken();
+        await task.getTasksFromDB(token);
+        renderer.renderTasks(task.tasks);
+
+    } catch (error) {
+        location.replace('/login');
+
+    }
 
     $createTaskBtn.on('click', renderer.handleCreateTaskClick);
     $taskModalCloseBtn.on('click', renderer.handleTaskModalClose);
@@ -87,6 +105,8 @@
     $allFilter.on('click', handleAllFilter);
     $toDoFilter.on('click', handleToDoFilter);
     $doneFilter.on('click', handleDoneFilter);
+
+    $logoutBtn.on('click', handleLogoutClick);
 
 })();
 
