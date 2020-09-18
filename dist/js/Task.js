@@ -32,7 +32,7 @@ class Task {
             this.tasks.push(resp.data);
             return resp.status;
         } catch (error) {
-            return error;
+            throw error;
         }
     }
 
@@ -53,7 +53,7 @@ class Task {
             }
 
         } catch (error) {
-            return error;
+            throw error;
         }
     }
 
@@ -80,7 +80,7 @@ class Task {
             }
 
         } catch (error) {
-            return error;
+            throw error;
         }
     }
 }

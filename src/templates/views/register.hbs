@@ -19,7 +19,7 @@
 
         <div class="input-container">
             <i class="fa fa-envelope icon"></i>
-            <input class="input-field" type="text" placeholder="Email" id="email-resgister-input">
+            <input class="input-field" type="text" placeholder="Email" id="email-register-input">
         </div>
 
         <div class="input-container">
@@ -34,19 +34,21 @@
 
         <button id="register-btn" class="btn">Register</button>
         <div class="container signin">
-            <p>Already have an account? <a href="#">Sign in</a>.</p>
+            <p>Already have an account? <a href="/login">Sign in</a>.</p>
         </div>
 
     </form>
 
     {{>footer}}
 
-    <script src="./jquery/dist/jquery.js"></script>
+    <script src="./jquery/dist/jquery.min.js"></script>
+    <script src="./validator/validator.min.js"></script>
     <script src="./axios/dist/axios.js"></script>
 
     <script src="./js/Login.service.js"></script>
     <script src="./js/Renderer.js"></script>
     <script src="./js/Task.js"></script>
+    <script src="./js/User.js"></script>
     <script src="./users.js"></script>
 </body>
 

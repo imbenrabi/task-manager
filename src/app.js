@@ -1,7 +1,8 @@
 const express = require('express');
-require('./db/mongoose');
 const path = require('path');
 const hbs = require('hbs');
+
+require('./db/mongoose');
 
 const tasksRouter = require('./routers/tasks');
 const usersRouter = require('./routers/users');

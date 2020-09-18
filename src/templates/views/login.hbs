@@ -13,21 +13,19 @@
     <form>
         <h2>Login</h2>
         <div class="input-container">
-            <i class="fa fa-user icon"></i>
-            <input class="input-field" type="text" placeholder="Username" name="usrnm">
-        </div>
-
-        <div class="input-container">
             <i class="fa fa-envelope icon"></i>
-            <input class="input-field" type="text" placeholder="Email" name="email">
+            <input class="input-field" type="text" placeholder="Email" id="email-login-input">
         </div>
 
         <div class="input-container">
             <i class="fa fa-key icon"></i>
-            <input class="input-field" type="password" placeholder="Password" name="psw">
+            <input class="input-field" type="password" placeholder="Password" id="pass-login-input">
         </div>
 
-        <button type="login-btn" class="btn">Login</button>
+        <button id="login-btn" class="btn">Login</button>
+        <div class="container signin">
+            <p>Don't have an account? <a href="/register">Register</a>.</p>
+        </div>
     </form>
 
     {{>footer}}
@@ -38,6 +36,7 @@
     <script src="./js/Login.service.js"></script>
     <script src="./js/Renderer.js"></script>
     <script src="./js/Task.js"></script>
+    <script src="./js/User.js"></script>
     <script src="./users.js"></script>
 </body>
 

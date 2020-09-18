@@ -18,12 +18,12 @@ const upload = multer({
         if (!file.originalname.match(/\.(jpg|png|jpeg)$/)) {
             return callback(new Error('Please upload an image'));
         }
-        
+
         callback(undefined, true);
     }
 });
 
-router.post('/users', async (req, res) => { 
+router.post('/users', async (req, res) => {
     const user = new User(req.body);
 
     try {
@@ -45,8 +45,8 @@ router.post('/users/login', async (req, res) => {
 
         res.send({ user, token });
     } catch (error) {
-        log(error)
-        res.status(400).send();
+
+        res.status(400).send(error);
     }
 })
 
@@ -60,9 +60,9 @@ router.post('/users/logout', auth, async (req, res) => {
         res.send();
     } catch (error) {
         log(error);
-        res.status(500).send();
+        res.status(500).send(error);
     }
-    
+
 })
 
 router.post('/users/logoutAll', auth, async (req, res) => {
@@ -72,7 +72,7 @@ router.post('/users/logoutAll', auth, async (req, res) => {
         res.send();
     } catch (error) {
         log(error);
-        res.status(500).sens();
+        res.status(500).send(error);
     }
 })
 
@@ -87,17 +87,17 @@ router.patch('/users/me', auth, async (req, res) => {
     const isAllowed = updates.every((update) => allowedUpdates.includes(update));
 
     if (!isAllowed) {
-        return res.status(400).send({error: 'Invalid updates!'});
+        return res.status(400).send({ error: 'Invalid updates!' });
     }
 
     try {
-        updates.forEach( (update) => req.user[update] = req.body[update] );
+        updates.forEach((update) => req.user[update] = req.body[update]);
         await req.user.save();
 
         res.send(req.user);
     } catch (error) {
-        log(error);
-        res.status(500).send();
+        res.status(500).send(error);
+
     }
 })
 
@@ -107,13 +107,13 @@ router.delete('/users/me', auth, async (req, res) => {
         sendCancellationMail(req.user.email, req.user.name);
         res.send(req.user);
     } catch (error) {
-        log(error);
-        res.status(500).send();
+        res.status(500).send(error);
+
     }
 })
 
-router.post('/users/me/avatar', auth, upload.single('avatar') ,async (req, res) => {
-    const buffer =  await sharp(req.file.buffer).resize({height: 250, width: 250}).png().toBuffer();
+router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) => {
+    const buffer = await sharp(req.file.buffer).resize({ height: 250, width: 250 }).png().toBuffer();
     req.user.avatar = buffer;
     await req.user.save();
     res.send();
@@ -142,10 +142,10 @@ router.get('/users/:id/avatar', async (req, res) => {
 
         res.set('Content-Type', 'image/png')
         res.send(user.avatar)
-        
+
     } catch (error) {
         log(error);
-        res.status(404).send()
+        res.status(404).send(error)
     }
 })
 
