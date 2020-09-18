@@ -1,4 +1,5 @@
 (async function () {
+    const loginService = new LoginManager();
     const task = new Task();
     const renderer = new Renderer();
 
