@@ -12,10 +12,17 @@
     const $doneFilter = $('#done-filter');
     const $logoutBtn = $('#logout-btn');
 
+    let token;
+
     const handleAddTask = async () => {
         const description = $taskDecriptionInput.val();
 
         try {
+            if (!token) {
+                alert('Please repeat th login process');
+                location.replace('/login');
+
+            }
             await task.createTask({ "description": description }, token);
             $taskDecriptionInput.val('');
             renderer.handleTaskModalClose();
@@ -84,7 +91,7 @@
     }
 
     try {
-        const token = loginService.getToken();
+        token = loginService.getToken();
         await task.getTasksFromDB(token);
         renderer.renderTasks(task.tasks);
 
