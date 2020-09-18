@@ -1,9 +1,11 @@
 const express = require('express');
 require('./db/mongoose');
 const path = require('path');
+const hbs = require('hbs');
 
 const tasksRouter = require('./routers/tasks');
 const usersRouter = require('./routers/users');
+const renderRouter = require('./routers/render')
 
 const distPath = path.join(__dirname, '../dist');
 const nodeModulesPath = path.join(__dirname, '../node_modules');
@@ -21,6 +23,7 @@ app.use(express.static(nodeModulesPath))
 app.use(express.json());
 app.use(tasksRouter);
 app.use(usersRouter);
+app.use(renderRouter);
 
 module.exports = app;
 
