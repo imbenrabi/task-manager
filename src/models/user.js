@@ -84,7 +84,7 @@ userSchema.methods.generateAuthToken = async function () {
     user.tokens = user.tokens.concat({ token });
     await user.save();
 
-    return(token)
+    return (token)
 }
 
 /**userSchema.statics house static methods */
@@ -104,25 +104,25 @@ userSchema.statics.findByCredentials = async (email, password) => {
     return user;
 }
 
-/**creating a middleware prior to the save of anew user, do not use arrow function
+/**creating a middleware prior to the save of a new user, do not use arrow function
  *since we want to preserve 'this' binding*/
 
- /**hash the plain text password before saving*/
- userSchema.pre('save', async function (next) {
-     const user = this;
+/**hash the plain text password before saving*/
+userSchema.pre('save', async function (next) {
+    const user = this;
 
     if (user.isModified('password')) {
         user.password = await bcrypt.hash(user.password, 8);
     }
-    
-     next();
- })
 
- /**delete user tasks when user is removed */
+    next();
+})
+
+/**delete user tasks when user is removed */
 userSchema.pre('remove', async function (next) {
     const user = this;
 
-    await Task.deleteMany({owner: user._id})
+    await Task.deleteMany({ owner: user._id })
     next();
 })
 
