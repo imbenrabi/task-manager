@@ -74,18 +74,18 @@
     await task.getTasksFromDB();
     renderer.renderTasks(task.tasks);
 
-    $createTaskBtn.click(renderer.handleCreateTaskClick);
-    $taskModalCloseBtn.click(renderer.handleTaskModalClose);
+    $createTaskBtn.on('click', renderer.handleCreateTaskClick);
+    $taskModalCloseBtn.on('click', renderer.handleTaskModalClose);
     window.onclick = renderer.handleClickOffModal;
 
-    $addTaskBtn.click(handleAddTask);
+    $addTaskBtn.on('click', handleAddTask);
 
     $toDoList.on('click', '.delete-btn', handleDeleteTask);
     $toDoList.on('click', '.done-btn', handleDoneTask);
 
-    $allFilter.click(handleAllFilter);
-    $toDoFilter.click(handleToDoFilter);
-    $doneFilter.click(handleDoneFilter);
+    $allFilter.on('click', handleAllFilter);
+    $toDoFilter.on('click', handleToDoFilter);
+    $doneFilter.on('click', handleDoneFilter);
 
 })();
 
