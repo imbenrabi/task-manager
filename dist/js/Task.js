@@ -1,13 +1,13 @@
-TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjE2Y2I4NTdjMWM2YTM4MjRjZWVmMjYiLCJpYXQiOjE1OTkwNTY5Njl9.J56rCWjChs-azwc21VE2meo1VmhlGOw5Ad40rL1rArg'
+// TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjE2Y2I4NTdjMWM2YTM4MjRjZWVmMjYiLCJpYXQiOjE1OTkwNTY5Njl9.J56rCWjChs-azwc21VE2meo1VmhlGOw5Ad40rL1rArg'
 
 class Task {
     constructor() {
         this.tasks = [];
     }
 
-    async getTasksFromDB() {
+    async getTasksFromDB(token) {
         const config = {
-            headers: { Authorization: `Bearer ${TOKEN}` } // will need to set up token management for the client - probably instance specific (in the constructor)
+            headers: { Authorization: `Bearer ${token}` }
         };
 
         try {
@@ -16,14 +16,14 @@ class Task {
             this.tasks = resp.data;
         }
         catch (error) {
-            console.log(error);
+            throw error;
         }
 
     }
 
-    async createTask(description) {
+    async createTask(description, token) {
         const config = {
-            headers: { Authorization: `Bearer ${TOKEN}` }
+            headers: { Authorization: `Bearer ${token}` }
         };
 
         try {
@@ -32,13 +32,13 @@ class Task {
             this.tasks.push(resp.data);
             return resp.status;
         } catch (error) {
-            return error;
+            throw error;
         }
     }
 
-    async deleteTask(id) {
+    async deleteTask(id, token) {
         const config = {
-            headers: { Authorization: `Bearer ${TOKEN}` }
+            headers: { Authorization: `Bearer ${token}` }
         };
 
         try {
@@ -53,13 +53,13 @@ class Task {
             }
 
         } catch (error) {
-            return error;
+            throw error;
         }
     }
 
-    async updateTask(id, updates) {
+    async updateTask(id, updates, token) {
         const config = {
-            headers: { Authorization: `Bearer ${TOKEN}` }
+            headers: { Authorization: `Bearer ${token}` }
         };
 
         if (this.tasks.find(t => t._id === id).completed === true) {
@@ -80,7 +80,7 @@ class Task {
             }
 
         } catch (error) {
-            return error;
+            throw error;
         }
     }
 }

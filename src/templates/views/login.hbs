@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/57722bdb99.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/login-style.css">
+    <title>Login</title>
+</head>
+
+<body>
+    <form>
+        <h2>Login</h2>
+        <div class="input-container">
+            <i class="fa fa-envelope icon"></i>
+            <input class="input-field" type="text" placeholder="Email" id="email-login-input">
+        </div>
+
+        <div class="input-container">
+            <i class="fa fa-key icon"></i>
+            <input class="input-field" type="password" placeholder="Password" id="pass-login-input">
+        </div>
+
+        <button id="login-btn" class="btn">Login</button>
+        <div class="container signin">
+            <p>Don't have an account? <a href="/register">Register</a>.</p>
+        </div>
+    </form>
+
+    {{>footer}}
+
+    <script src="./jquery/dist/jquery.js"></script>
+    <script src="./axios/dist/axios.js"></script>
+
+    <script src="./js/Login.service.js"></script>
+    <script src="./js/Renderer.js"></script>
+    <script src="./js/Task.js"></script>
+    <script src="./js/User.js"></script>
+    <script src="./users.js"></script>
+</body>
+
+</html>

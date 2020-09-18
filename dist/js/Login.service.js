@@ -1,4 +1,3 @@
-
 class LoginManager {
     login(token) {
         localStorage.setItem('userToken', token);

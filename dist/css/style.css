@@ -12,7 +12,7 @@ body {
 header {
     grid-area: h;
 
-    background-color: #fab1a0;
+    background-color: dodgerblue;
 }
 
 footer{
@@ -36,7 +36,7 @@ footer{
     "f"
     "f";
 
-    background-color: #fab1a0;
+    background-color: dodgerblue
 }
 
 #side-bar-buttons{
@@ -62,6 +62,7 @@ footer{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    
 }
 
 #tasks{
@@ -151,7 +152,7 @@ footer{
 /* Modal Header */
 .modal-header {
     padding: 2px 16px;
-    background-color: #fab1a0;
+    background-color: dodgerblue;
     color: black;
 }
   
@@ -178,7 +179,7 @@ footer{
 /* Modal Footer */
 .modal-footer {
     padding: 2px 16px;
-    background-color: #fab1a0;
+    background-color: dodgerblue;
     color: black;
 }
   
