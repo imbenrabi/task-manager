@@ -84,7 +84,3 @@ class Task {
         }
     }
 }
-
-// const t = new Task()
-// t.getTasksFromDB()
-// console.log(t);

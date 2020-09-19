@@ -1,4 +1,4 @@
-class LoginManager {
+class AuthService {
     login(token) {
         localStorage.setItem('userToken', token);
 

@@ -1,5 +1,5 @@
 (function () {
-    const loginService = new LoginManager();
+    const authService = new AuthService();
     const user = new User();
 
     const $registerPass = $('#pass-register-input');
@@ -23,7 +23,7 @@
             try {
                 const token = await user.createUser({ name, email, password: passA });
 
-                loginService.login(token);
+                authService.login(token);
                 location.replace('/');
             } catch (error) {
                 console.log(error);
@@ -54,7 +54,7 @@
                 return alert('Unable to login.');
 
             } else {
-                loginService.login(token);
+                authService.login(token);
                 location.replace('/');
 
             }

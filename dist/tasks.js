@@ -1,5 +1,5 @@
 (async function () {
-    const loginService = new LoginManager();
+    const authService = new AuthService();
     const task = new Task();
     const renderer = new Renderer();
 
@@ -19,7 +19,7 @@
 
         try {
             if (!token) {
-                alert('Please repeat th login process');
+                alert('Please repeat the login process');
                 location.replace('/login');
 
             }
@@ -82,16 +82,16 @@
 
     const handleLogoutClick = () => {
         location.replace('/login');
-        loginService.logout();
+        authService.logout();
 
     }
 
-    if (!loginService.isLoggedIn()) {
+    if (!authService.isLoggedIn()) {
         location.replace('/login');
     }
 
     try {
-        token = loginService.getToken();
+        token = authService.getToken();
         await task.getTasksFromDB(token);
         renderer.renderTasks(task.tasks);
 
