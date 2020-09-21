@@ -2,6 +2,7 @@
     const authService = new AuthService();
     const task = new Task();
     const renderer = new Renderer();
+    const user = new User();
 
     const $createTaskBtn = $('#create-task');
     const $addTaskBtn = $('#add-task-btn');
@@ -80,9 +81,15 @@
         renderer.renderTasks(task.tasks);
     }
 
-    const handleLogoutClick = () => {
-        location.replace('/login');
-        authService.logout();
+    const handleLogoutClick = async (e) => {
+        try {
+            await user.logoutUser(authService.getToken());
+            authService.logout();
+            location.replace('/login');
+
+        } catch (error) {
+            alert(error);
+        }
 
     }
 
