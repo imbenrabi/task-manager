@@ -34,8 +34,23 @@ class User {
         }
     }
 
-    async logoutUser() {
+    async logoutUser(token) {
+        try {
+            const config = {
+                headers: { Authorization: `Bearer ${token}` }
+            };
 
+            const resp = await axios.post('/users/logout', config);
+
+            if (resp.status !== 200) {
+
+                throw new Error('Unable to logout');
+            }
+
+        } catch (error) {
+            throw error;
+
+        }
     }
 
     async getUserData() {
