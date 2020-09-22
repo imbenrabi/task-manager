@@ -81,7 +81,7 @@
         renderer.renderTasks(task.tasks);
     }
 
-    const handleLogoutClick = async (e) => {
+    const handleLogoutClick = async () => {
         try {
             await user.logoutUser(authService.getToken());
             authService.logout();

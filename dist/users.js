@@ -32,11 +32,11 @@
 
         } else {
             alert('Something is wrong with your form, please fill it again');
-        }
+            $registerPass.val('');
+            $registerPass2.val('');
+            $registerEmail.val('');
 
-        $registerPass.val('');
-        $registerPass2.val('');
-        $registerEmail.val('');
+        }
 
     }
 
