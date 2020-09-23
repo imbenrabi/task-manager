@@ -6,7 +6,7 @@
 
     const $createTaskBtn = $('#create-task');
     const $addTaskBtn = $('#add-task-btn');
-    const $taskDecriptionInput = $('#task-description-input');
+    const $taskDecriptionInput = $('#icon_prefix');
     const $toDoList = $('#to-do-list');
     const $allFilter = $('#all-filter');
     const $toDoFilter = $('#todo-filter');
@@ -106,6 +106,11 @@
         location.replace('/login');
 
     }
+
+    $(document).on('ready', function () {
+        $('.sidenav').sidenav();
+    });
+
 
     $createTaskBtn.on('click', renderer.handleCreateTaskClick);
     $taskModalCloseBtn.on('click', renderer.handleTaskModalClose);

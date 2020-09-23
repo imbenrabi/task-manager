@@ -54,6 +54,23 @@ class User {
     }
 
     async getUserData() {
+        try {
+            const config = {
+                headers: { Authorization: `Bearer ${token}` }
+            };
 
+            const resp = await axios.post('/users/me', config);
+
+            if (resp.status !== 200) {
+
+                throw new Error('Unable to fetch data, reauthenticate.');
+            }
+
+            this.data = resp.data;
+
+        } catch (error) {
+            throw error;
+
+        }
     }
 }
