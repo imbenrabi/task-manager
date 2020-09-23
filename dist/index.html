@@ -16,8 +16,8 @@
 <body>
     <nav>
         <div class="nav-wrapper purple">
-            <a class="brand-logo">My Tasks</a>
-            <a data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <a href="#!" class="brand-logo">My Tasks</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a id="todo-filter">ToDo</a></li>
                 <li><a id="done-filter">Done</a></li>
@@ -28,11 +28,12 @@
     </nav>
 
     <ul class="sidenav" id="mobile-demo">
-        <li><a href="sass.html">Sass</a></li>
-        <li><a href="badges.html">Components</a></li>
-        <li><a href="collapsible.html">Javascript</a></li>
-        <li><a href="mobile.html">Mobile</a></li>
+        <li><a id="todo-filter">ToDo</a></li>
+        <li><a id="done-filter">Done</a></li>
+        <li><a id="all-filter">All</a></li>
+        <li><a id="logout-btn">Logout</a></li>
     </ul>
+
     <div id="main-content">
         <div>
             <ul id="to-do-list" class="collection"></ul>
@@ -52,7 +53,7 @@
                     <div class="card-stacked">
                         <div class="card-content">
 
-                            <form class="col s12">
+                            <form class="col s12" autocomplete="false">
 
                                 <div class="input-field col s6">
                                     <i class="material-icons prefix">whatshot</i>
