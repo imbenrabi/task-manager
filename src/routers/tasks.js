@@ -1,9 +1,13 @@
 const express = require('express');
 const Task = require('../models/task');
 const auth = require('../middleware/auth');
+const { clientDateFormat, clientTaskStatusFormat } = require('../utils/DataFormatter.service')
 const log = console.log;
 
 const router = new express.Router();
+
+const { format, parseISO } = require('date-fns');
+
 
 router.post('/tasks', auth, async (req, res) => {
     const task = new Task({
@@ -25,32 +29,42 @@ router.post('/tasks', auth, async (req, res) => {
 // limit skip //GET /tasks?limit=10&skip=10(for 2nd page)
 // sort //GET /tasks?sortBy=createdAt:<asc/desc>
 router.get('/tasks', auth, async (req, res) => {
-    const match = { owner: req.user._id };
-    const options = {
-        limit: parseInt(req.query.limit),
-        skip: parseInt(req.query.skip),
-        sort: {}
-    };
-
-    if (req.query.completed) {
-        match.completed = req.query.completed === 'true';
-    }
-
-    if (req.query.sortBy) {
-        const parts = req.query.sortBy.split(':');
-        options.sort[parts[0]] = parts[1] === 'desc' ? -1 : 1;
-    }
-
-
     try {
+        const match = { owner: req.user._id };
+        const options = {
+            limit: parseInt(req.query.limit),
+            skip: parseInt(req.query.skip),
+            sort: {}
+        };
+
+        if (req.query.completed) {
+            match.completed = req.query.completed === 'true';
+        }
+
+        if (req.query.sortBy) {
+            const parts = req.query.sortBy.split(':');
+            options.sort[parts[0]] = parts[1] === 'desc' ? -1 : 1;
+        }
+
         req.user.tasks = await Task.find(match, null, options);
 
         /**using mongoose virtuals */
-        // await req.user.populate({path: 'tasks', match, options}).execPopulate();
-        res.send(req.user.tasks);
+        // await req.user.populate({path: 'tasks', match, options}).exec();
+        const tasks = [];
+
+        req.user.tasks.forEach((task) => {
+            const taskObject = task.toObject();
+
+            taskObject.createdAt = clientDateFormat(Date.parse(taskObject.createdAt));
+            taskObject.updatedAt = clientDateFormat(Date.parse(taskObject.updatedAt));
+            taskObject.completed = clientTaskStatusFormat(taskObject.completed);
+            tasks.push(taskObject)
+        })
+
+        res.send(tasks);
 
     } catch (error) {
-        log(error);
+        console.log(error);
         res.status(500).send(error);
     }
 })

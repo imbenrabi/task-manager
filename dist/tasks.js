@@ -28,6 +28,7 @@
             $taskDecriptionInput.val('');
             renderer.handleTaskModalClose();
 
+            await task.getTasksFromDB(token);
             renderer.renderTasks(task.tasks);
 
         } catch (error) {
@@ -70,11 +71,11 @@
     }
 
     const handleToDoFilter = () => {
-        renderer.renderTasks(task.tasks.filter(t => t.completed === false));
+        renderer.renderTasks(task.tasks.filter(t => t.completed === 'To Do'));
     }
 
     const handleDoneFilter = () => {
-        renderer.renderTasks(task.tasks.filter(t => t.completed === true));
+        renderer.renderTasks(task.tasks.filter(t => t.completed === 'Done'));
     }
 
     const handleAllFilter = () => {
