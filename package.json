@@ -17,6 +17,7 @@
   "dependencies": {
     "@sendgrid/mail": "^7.2.1",
     "bcryptjs": "^2.4.3",
+    "date-fns": "^2.16.1",
     "express": "^4.17.1",
     "handlebars": "^4.7.6",
     "hbs": "^4.1.1",
