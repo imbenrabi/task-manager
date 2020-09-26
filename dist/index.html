@@ -5,82 +5,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/57722bdb99.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="./materialize-css/dist/css/materialize.min.css"
+        media="screen,projection" />
+
     <link rel="stylesheet" href="./css/style.css">
     <title>Tasks</title>
 </head>
 
-<body style="max-width: 100vw;">
-    <header>
-        <h1>My Tasks</h1>
-
-    </header>
-
-    <div id="side-bar">
-        <div id="side-bar-buttons">
-            <div id="all-filter" class="side-bar-button">All</div>
-            <div id="todo-filter" class="side-bar-button">To Do</div>
-            <div id="done-filter" class="side-bar-button">Done</div>
-            <div id="logout-btn" class="side-bar-button">Logout</div>
-
+<body>
+    <nav>
+        <div class="nav-wrapper purple">
+            <a href="#!" class="brand-logo">My Tasks</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a class="todo-filter">ToDo</a></li>
+                <li><a class="done-filter">Done</a></li>
+                <li><a class="all-filter">All</a></li>
+                <li><a class="logout-btn">Logout</a></li>
+            </ul>
         </div>
+    </nav>
 
-    </div>
+    <ul class="sidenav" id="mobile-demo">
+        <li><a class="todo-filter">ToDo</a></li>
+        <li><a class="done-filter">Done</a></li>
+        <li><a class="all-filter">All</a></li>
+        <li><a class="logout-btn">Logout</a></li>
+    </ul>
 
     <div id="main-content">
-        <div id="add-task-modal" class="modal">
-            <!-- Modal content -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span id="task-modal-close" class="close-modal">&times;</span>
-                    <h2>Create New Task</h2>
-                </div>
-                <div class="modal-body">
-                    <h3>What do you need to do?</h3>
-                    <div>
-                        <input id="task-description-input" type="text" placeholder="Describe your task">
-                        <button id="add-task-btn">Add Task</button>
+        <div>
+            <ul id="to-do-list" class="collection"></ul>
 
+        </div>
+        <div id="bottom">
+            <a id="create-task" class="btn-floating btn-large waves-effect waves-light purple"><i
+                    class="material-icons">add</i></a>
+
+        </div>
+
+        <div id="add-task-modal" class="modal">
+            <div class="col s12 m7 modal-content">
+                <span id="task-modal-close" class="close-modal">&times;</span>
+                <h5 class="header">New Task</h5>
+                <div class="card horizontal">
+                    <div class="card-stacked">
+                        <div class="card-content">
+
+                            <form class="col s12" autocomplete="off">
+
+                                <div class="input-field col s6">
+                                    <i class="material-icons prefix">whatshot</i>
+                                    <input id="icon_prefix" type="text" class="validate">
+                                    <label for="icon_prefix">Task Description</label>
+                                </div>
+
+                            </form>
+
+                        </div>
+                        <div class="card-action">
+                            <a id="add-task-btn" class="btn-floating waves-effect waves-light purple"><i
+                                    class="material-icons">done_outline</i></a>
+                        </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <h4>"No rest for the wicked..."</h4>
-                </div>
             </div>
 
         </div>
 
-        <div id="tasks">
-            <div id="to-do-list"></div>
-
-            <div id="bottom">
-                <button id="create-task">Create Task</button>
-            </div>
-        </div>
     </div>
 
+
     <footer>
-        <p>Created by Ben Rabi</p>
+        <p>Created by imbenabi</p>
     </footer>
+
+
 
     <script id="tasks-template" type="text/x-handlebars-template">
         {{#each tasks}}
-        <div class="task" data-id="{{_id}}">
-            <div>
-                <p class="task-decription">{{description}}</p>
-                <p class="task-status">{{completed}}</p>
-                <p class="class-date">{{createdAt}}</p>
-                <button class="done-btn">Done</button>
-
-            </div>
-            <button class="delete-btn">Delete Task</button>
-
-        </div>
+        <li class="collection-item avatar task" data-id="{{_id}}">
+            <i class="material-icons circle purple">whatshot</i>
+            <span class="title">{{description}}</span>
+            <p>Created at: {{createdAt}} <br>
+                Done: {{completed}}
+            </p>
+            <a class="secondary-content"><i class="material-icons done-btn">done_outline</i><br><i class="material-icons delete-btn">delete_outline</i></a>
+        </li>
         {{/each}}
     </script>
 
     <script src="./jquery/dist/jquery.js"></script>
     <script src="./axios/dist/axios.js"></script>
     <script src="./handlebars/dist/handlebars.js"></script>
+    <script src="./materialize-css/dist/js/materialize.min.js"></script>
 
     <script src="./js/Auth.service.js"></script>
     <script src="./js/Renderer.js"></script>

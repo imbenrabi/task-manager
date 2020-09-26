@@ -36,24 +36,43 @@ class User {
 
     async logoutUser(token) {
         try {
-            const config = {
-                headers: { Authorization: `Bearer ${token}` }
-            };
+            const request = axios.create({
+                baseURL: "http://localhost:3000/users/logout"
+            });
 
-            const resp = await axios.post('/users/logout', config);
+            request.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            const resp = await request.post();
 
             if (resp.status !== 200) {
 
                 throw new Error('Unable to logout');
             }
 
+
+        } catch (err) {
+            throw error;
+        }
+
+    }
+
+    async getUserData() {
+        try {
+            const config = {
+                headers: { Authorization: `Bearer ${token}` }
+            };
+
+            const resp = await axios.post('/users/me', config);
+
+            if (resp.status !== 200) {
+
+                throw new Error('Unable to fetch data, reauthenticate.');
+            }
+
+            this.data = resp.data;
+
         } catch (error) {
             throw error;
 
         }
-    }
-
-    async getUserData() {
-
     }
 }

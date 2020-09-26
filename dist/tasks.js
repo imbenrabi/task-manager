@@ -6,12 +6,12 @@
 
     const $createTaskBtn = $('#create-task');
     const $addTaskBtn = $('#add-task-btn');
-    const $taskDecriptionInput = $('#task-description-input');
+    const $taskDecriptionInput = $('#icon_prefix');
     const $toDoList = $('#to-do-list');
-    const $allFilter = $('#all-filter');
-    const $toDoFilter = $('#todo-filter');
-    const $doneFilter = $('#done-filter');
-    const $logoutBtn = $('#logout-btn');
+    const $allFilter = $('.all-filter');
+    const $toDoFilter = $('.todo-filter');
+    const $doneFilter = $('.done-filter');
+    const $logoutBtn = $('.logout-btn');
 
     let token;
 
@@ -82,6 +82,7 @@
     }
 
     const handleLogoutClick = async () => {
+        console.log('here');
         try {
             await user.logoutUser(authService.getToken());
             authService.logout();
@@ -106,6 +107,11 @@
         location.replace('/login');
 
     }
+
+    $(document).ready(function () {
+        $('.sidenav').sidenav();
+    });
+
 
     $createTaskBtn.on('click', renderer.handleCreateTaskClick);
     $taskModalCloseBtn.on('click', renderer.handleTaskModalClose);
