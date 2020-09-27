@@ -61,7 +61,7 @@ class User {
                 headers: { Authorization: `Bearer ${token}` }
             };
 
-            const resp = await axios.post('/users/me', config);
+            const resp = await axios.get('/users/me', config);
 
             if (resp.status !== 200) {
 

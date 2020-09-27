@@ -4,7 +4,6 @@
     const renderer = new Renderer();
     const user = new User();
 
-    const $toDoList = $('#to-do-list');
     const $allFilter = $('.all-filter');
     const $toDoFilter = $('.todo-filter');
     const $doneFilter = $('.done-filter');
@@ -13,8 +12,39 @@
 
     let token;
 
+    const handleFilterClick = () => {
+        console.log('here');
+        if (!authService.isLoggedIn()) {
+            return location.replace('/login');
+        }
+
+        location.replace('/')
+    }
+
+    const handleAccountClick = async () => {
+
+        if (!authService.isLoggedIn()) {
+            return location.replace('/login');
+        }
+
+        location.replace('/account')
+
+    }
+
+    const handleLogoutClick = async () => {
+        try {
+            await user.logoutUser(authService.getToken());
+            authService.logout();
+            location.replace('/login');
+
+        } catch (error) {
+            alert(error);
+        }
+
+    }
+
     if (!authService.isLoggedIn()) {
-        location.replace('/login');
+        return location.replace('/login');
     }
 
 
@@ -34,4 +64,11 @@
         $('.sidenav').sidenav();
     });
 
-})
+    $allFilter.on('click', handleFilterClick);
+    $toDoFilter.on('click', handleFilterClick);
+    $doneFilter.on('click', handleFilterClick);
+
+    $accountBtn.on('click', handleAccountClick);
+    $logoutBtn.on('click', handleLogoutClick);
+
+})();
