@@ -11,6 +11,7 @@
     const $allFilter = $('.all-filter');
     const $toDoFilter = $('.todo-filter');
     const $doneFilter = $('.done-filter');
+    const $accountBtn = $('.account-btn');
     const $logoutBtn = $('.logout-btn');
 
     let token;
@@ -83,7 +84,6 @@
     }
 
     const handleLogoutClick = async () => {
-        console.log('here');
         try {
             await user.logoutUser(authService.getToken());
             authService.logout();
@@ -95,9 +95,20 @@
 
     }
 
+    const handleAccountClick = async () => {
+
+        if (!authService.isLoggedIn()) {
+            return location.replace('/login');
+        }
+
+        location.replace('/account')
+
+    }
+
     if (!authService.isLoggedIn()) {
         location.replace('/login');
     }
+
 
     try {
         token = authService.getToken();
@@ -113,7 +124,6 @@
         $('.sidenav').sidenav();
     });
 
-
     $createTaskBtn.on('click', renderer.handleCreateTaskClick);
     $taskModalCloseBtn.on('click', renderer.handleTaskModalClose);
     window.onclick = renderer.handleClickOffModal;
@@ -127,6 +137,7 @@
     $toDoFilter.on('click', handleToDoFilter);
     $doneFilter.on('click', handleDoneFilter);
 
+    $accountBtn.on('click', handleAccountClick);
     $logoutBtn.on('click', handleLogoutClick);
 
 })();

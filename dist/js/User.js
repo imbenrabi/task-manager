@@ -55,7 +55,7 @@ class User {
 
     }
 
-    async getUserData() {
+    async getUserData(token) {
         try {
             const config = {
                 headers: { Authorization: `Bearer ${token}` }
