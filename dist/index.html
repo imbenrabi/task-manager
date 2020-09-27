@@ -14,29 +14,32 @@
 </head>
 
 <body>
-    <nav>
-        <div class="nav-wrapper purple">
-            <a href="#!" class="brand-logo">My Tasks</a>
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a class="todo-filter">ToDo</a></li>
-                <li><a class="done-filter">Done</a></li>
-                <li><a class="all-filter">All</a></li>
-                <li><a class="account-btn">Account</a></li>
-                <li><a class="logout-btn">Logout</a></li>
-            </ul>
-        </div>
-    </nav>
+    <header>
+        <nav>
+            <div class="nav-wrapper purple">
+                <a href="#!" class="brand-logo">My Tasks</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a class="todo-filter">ToDo</a></li>
+                    <li><a class="done-filter">Done</a></li>
+                    <li><a class="all-filter">All</a></li>
+                    <li><a class="account-btn">Account</a></li>
+                    <li><a class="logout-btn">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
 
-    <ul class="sidenav" id="mobile-demo">
-        <li><a class="todo-filter">ToDo</a></li>
-        <li><a class="done-filter">Done</a></li>
-        <li><a class="all-filter">All</a></li>
-        <li><a class="account-btn">Account</a></li>
-        <li><a class="logout-btn">Logout</a></li>
-    </ul>
+        <ul class="sidenav" id="mobile-demo">
+            <li><a class="todo-filter">ToDo</a></li>
+            <li><a class="done-filter">Done</a></li>
+            <li><a class="all-filter">All</a></li>
+            <li><a class="account-btn">Account</a></li>
+            <li><a class="logout-btn">Logout</a></li>
+        </ul>
 
-    <div id="main-content">
+    </header>
+
+    <main>
         <div>
             <ul id="to-do-list" class="collection"></ul>
 
@@ -76,8 +79,7 @@
 
         </div>
 
-    </div>
-
+    </main>
 
     <footer>
         <p>Created by imbenabi</p>
