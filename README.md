@@ -13,9 +13,9 @@
 
 ## App screenshots
 <h1 align="center">
-    <img src="./screenshots/tasks.png" width="400"/>
-    <img src="./screenshots/newTask.png" width="400"/>
-    <img src="./screenshots/taskLogin.png" width="400"/>
+    <img src="./screenshots/tasks.png" width="500"/>
+    <img src="./screenshots/newTask.png" width="500"/>
+    <img src="./screenshots/taskLogin.png" width="500"/>
 </h1>
 
 ## Roadmap
